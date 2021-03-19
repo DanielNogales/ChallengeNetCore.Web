@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ChallengeNetCore.Web.Models.PriceList>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <h1>Lista de productos</h1>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Fecha</th>
+                    <th>Producto</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pList in Model)
+                {
+                    <tr>
+                        <td>@pList.Id</td>
+                        <td>@pList.Date.ToShortDateString()</td>
+                        <td>@pList.Product.Name</td>
+                        <td>@pList.Product.Category.Name</td>
+                        <td>$ @pList.Price</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>
