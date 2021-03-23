@@ -9,6 +9,9 @@ namespace ChallengeNetCore.Web.Business
     {
         public List<PriceList> GetProducts(int? price)
         {
+            if (price == null)
+                return GetProducts();
+
             if (price <= 0)
                 return new List<PriceList>();
 
