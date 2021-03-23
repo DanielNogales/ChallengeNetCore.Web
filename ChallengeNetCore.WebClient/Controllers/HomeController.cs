@@ -12,16 +12,12 @@ namespace ChallengeNetCore.WebClient.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
-            return View();
+            var salesService = new SalesService();
+            var productList = salesService.GetProducts();
+
+            return View(productList);
         }
 
         [Route("Home/ProductsList/{price?}")]
