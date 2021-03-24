@@ -23,4 +23,4 @@ Se devuelve:
 Tipo de consulta:
 1) A través de la página, input de presupuesto.
 2) A través de la url, ej:
-        Home/ProductsList/<Presupuesto a consultar>
+        Home/ProductsList/ <Presupuesto a consultar> 
