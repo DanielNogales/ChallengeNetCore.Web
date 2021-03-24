@@ -2,6 +2,7 @@
 Challenge .Net Core
 
 Desde una lista de stock de productos con sus respectivas categorias (PRODUNO, PRODDOS).
+
 Se devuelve:
 
 • Un único producto de cada categoría.
