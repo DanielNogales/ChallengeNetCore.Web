@@ -7,18 +7,17 @@ namespace ChallengeNetCore.Web.Business
 {
     public class SalesService
     {
-        public List<PriceList> GetProducts(int? price)
+        public List<PriceList> GetProducts(double? price)
         {
-            if (price == null)
+            if (price == null || price == 0)
                 return GetProducts();
 
-            if (price <= 0)
-                return new List<PriceList>();
-
+            
             if (price > 1_000_000)
                 return new List<PriceList>();
 
-            List<PriceList> pList = GetProductsGroupCategory(price);
+
+            List<PriceList> pList = GetProductsGroupCategory(Convert.ToInt32(price));
             return pList;
         }
 

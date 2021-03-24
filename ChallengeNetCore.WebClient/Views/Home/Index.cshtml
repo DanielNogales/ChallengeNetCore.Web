@@ -5,39 +5,38 @@
 }
 
 <h1>Lista de Precios</h1>
-
-<p>
-    @*ToDo*@
-    @*<a asp-action="Create">Crear nuevo registro</a>*@
-</p>
-
-<table class="table">
-    <thead>
-        <tr>
-
-            <th>Id</th>
-            <th>Fecha</th>
-            <th>Producto</th>
-            <th>Categoría</th>
-            <th>Precio</th>
-
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var pList in Model)
-        {
+<div class="container pt-3">
+    <form method="post">
+        @Html.TextBoxFor(i => i.FirstOrDefault().Price, new { @type = "number" })
+        <button type="submit" class="btn btn-primary">Buscar presupuesto</button>
+    </form>
+</div>
+<div class="container pt-3">
+    <table class="table">
+        <thead>
             <tr>
-                <td>@pList.Id</td>
-                <td>@pList.Date.ToShortDateString()</td>
-                <td>@pList.Product.Name</td>
-                <td>@pList.Product.Category.Name</td>
-                <td>$ @pList.Price</td>
-
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Precio</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var pList in Model)
+            {
+                <tr>
+                    <td>@pList.Id</td>
+                    <td>@pList.Date.ToShortDateString()</td>
+                    <td>@pList.Product.Name</td>
+                    <td>@pList.Product.Category.Name</td>
+                    <td>$ @pList.Price</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 <a href="@Url.Action("ProductsList", "Home", new { price = 70})" class="btn btn-primary">Prueba Ejemplo 1 del documento: $70</a>
-
 <a href="@Url.Action("ProductsList", "Home", new { price = 60})" class="btn btn-primary">Prueba Ejemplo 2 del documento: $60</a>

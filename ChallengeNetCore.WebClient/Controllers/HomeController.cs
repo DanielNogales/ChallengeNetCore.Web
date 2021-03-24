@@ -12,10 +12,13 @@ namespace ChallengeNetCore.WebClient.Controllers
 {
     public class HomeController : Controller
     {
+        [BindProperty(SupportsGet = true)]
+        public double Price { get; set; }
+
         public IActionResult Index()
         {
             var salesService = new SalesService();
-            var productList = salesService.GetProducts();
+            var productList = salesService.GetProducts(Price);
 
             return View(productList);
         }
@@ -28,6 +31,7 @@ namespace ChallengeNetCore.WebClient.Controllers
             
             return View(productList);
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChallengeNetCore.Web.Data",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChallengeNetCore.Web.BusinessTests", "ChallengeNetCore.Web.BusinessTests\ChallengeNetCore.Web.BusinessTests.csproj", "{BF325B23-E20B-4B08-9D26-84B49F49CEB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChallengeNetCore.Web.Client", "ChallengeNetCore.WebClient\ChallengeNetCore.Web.Client.csproj", "{3CBA3514-C906-4FFF-BE0D-16818338DCAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChallengeNetCore.Web.Client", "ChallengeNetCore.WebClient\ChallengeNetCore.Web.Client.csproj", "{3CBA3514-C906-4FFF-BE0D-16818338DCAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

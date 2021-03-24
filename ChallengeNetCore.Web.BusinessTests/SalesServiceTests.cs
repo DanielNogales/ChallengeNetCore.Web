@@ -55,7 +55,7 @@ namespace ChallengeNetCore.Web.Business.Tests
 
             var products = salesService.GetProducts(0);
 
-            Assert.AreEqual(0, products.Count);
+            Assert.Greater(products.Count, 0);
         }
     }
 }
