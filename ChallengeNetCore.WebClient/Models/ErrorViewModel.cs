@@ -1,6 +1,6 @@
 using System;
 
-namespace ChallengeNetCore.WebClient.Models
+namespace ChallengeNetCore.Web.Client.Models
 {
     public class ErrorViewModel
     {

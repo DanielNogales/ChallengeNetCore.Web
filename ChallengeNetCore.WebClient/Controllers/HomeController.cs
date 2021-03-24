@@ -1,5 +1,6 @@
 ﻿using ChallengeNetCore.Web.Business;
-using ChallengeNetCore.WebClient.Models;
+using ChallengeNetCore.Web.Client.Models;
+using ChallengeNetCore.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,7 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ChallengeNetCore.WebClient.Controllers
+namespace ChallengeNetCore.Web.Client.Controllers
 {
     public class HomeController : Controller
     {
@@ -28,10 +29,21 @@ namespace ChallengeNetCore.WebClient.Controllers
         {
             var salesService = new SalesService();
             var productList = salesService.GetProducts(price);
-            
+
             return View(productList);
         }
 
+        [HttpGet]
+        public IActionResult AddPriceList()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public IActionResult AddPriceList(PriceListDto piceList)
+        {
+            return RedirectToAction("Index");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

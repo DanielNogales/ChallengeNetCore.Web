@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ChallengeNetCore.WebClient
+namespace ChallengeNetCore.Web.Client
 {
     public class Startup
     {

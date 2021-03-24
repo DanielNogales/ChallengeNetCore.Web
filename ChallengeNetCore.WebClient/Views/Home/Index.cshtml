@@ -9,8 +9,10 @@
     <form method="post">
         @Html.TextBoxFor(i => i.FirstOrDefault().Price, new { @type = "number" })
         <button type="submit" class="btn btn-primary">Buscar presupuesto</button>
+        <a href="Home/AddPriceList" class="btn btn-primary" role="button">Crear nuevo registro de lista de precios</a>
     </form>
 </div>
+
 <div class="container pt-3">
     <table class="table">
         <thead>
@@ -38,5 +40,5 @@
     </table>
 </div>
 
-<a href="@Url.Action("ProductsList", "Home", new { price = 70})" class="btn btn-primary">Prueba Ejemplo 1 del documento: $70</a>
-<a href="@Url.Action("ProductsList", "Home", new { price = 60})" class="btn btn-primary">Prueba Ejemplo 2 del documento: $60</a>
+@*<a href="@Url.Action("ProductsList", "Home", new { price = 70})" class="btn btn-primary">Prueba Ejemplo 1 del documento: $70</a>
+    <a href="@Url.Action("ProductsList", "Home", new { price = 60 })" class="btn btn-primary">Prueba Ejemplo 2 del documento: $60</a>*@
