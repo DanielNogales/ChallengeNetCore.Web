@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ChallengeNetCore.Web.Business
 {
-    public class StockService
+    public class StockService : IStockService
     {
         public List<PriceList> GetProductsCategory(string categoryName)
         {

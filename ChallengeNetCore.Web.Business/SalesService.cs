@@ -5,14 +5,14 @@ using System.Linq;
 
 namespace ChallengeNetCore.Web.Business
 {
-    public class SalesService
+    public class SalesService : ISalesService
     {
         public List<PriceList> GetProducts(double? price)
         {
             if (price == null || price == 0)
                 return GetProducts();
 
-            
+
             if (price > 1_000_000)
                 return new List<PriceList>();
 

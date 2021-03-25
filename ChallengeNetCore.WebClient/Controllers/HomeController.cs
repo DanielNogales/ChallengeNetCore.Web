@@ -13,25 +13,30 @@ namespace ChallengeNetCore.Web.Client.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ISalesService _salesService;
+
+        public HomeController(ISalesService salesService)
+        {
+            _salesService = salesService;
+        }
+
         [BindProperty(SupportsGet = true)]
         public double Price { get; set; }
 
         public IActionResult Index()
         {
-            var salesService = new SalesService();
-            var productList = salesService.GetProducts(Price);
-
+            var productList = _salesService.GetProducts(Price);
             return View(productList);
         }
+
 
         [Route("Home/ProductsList/{price?}")]
         public ViewResult ProductsList(int? price)
         {
-            var salesService = new SalesService();
-            var productList = salesService.GetProducts(price);
-
+            var productList = _salesService.GetProducts(price);
             return View(productList);
         }
+
 
         [HttpGet]
         public IActionResult AddPriceList()
@@ -44,6 +49,8 @@ namespace ChallengeNetCore.Web.Client.Controllers
         {
             return RedirectToAction("Index");
         }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
