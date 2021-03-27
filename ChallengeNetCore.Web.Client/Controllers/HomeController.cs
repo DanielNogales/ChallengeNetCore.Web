@@ -1,4 +1,5 @@
-﻿using ChallengeNetCore.Web.Business;
+﻿using AutoMapper;
+using ChallengeNetCore.Web.Business;
 using ChallengeNetCore.Web.Client.Models;
 using ChallengeNetCore.Web.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +15,13 @@ namespace ChallengeNetCore.Web.Client.Controllers
     public class HomeController : Controller
     {
         private readonly ISalesService _salesService;
+        private readonly IMapper _mapper; 
 
-        public HomeController(ISalesService salesService)
+        public HomeController(ISalesService salesService, IMapper mapper)
         {
+            
             _salesService = salesService;
+            _mapper = mapper;
         }
 
         [BindProperty(SupportsGet = true)]
@@ -45,12 +49,17 @@ namespace ChallengeNetCore.Web.Client.Controllers
         }
         
         [HttpPost]
-        public IActionResult AddPriceList(PriceListDto piceList)
+        public IActionResult AddPriceList(PriceListDto piceListDto)
         {
+            PriceList priceList = GetPriceListFromDto(piceListDto);
             return RedirectToAction("Index");
         }
 
-
+        PriceList GetPriceListFromDto(PriceListDto piceListDto)
+        {
+            var priceList = _mapper.Map<PriceList>(piceListDto);
+            return priceList;
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
