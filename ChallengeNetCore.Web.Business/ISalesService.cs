@@ -5,7 +5,8 @@ namespace ChallengeNetCore.Web.Business
 {
     public interface ISalesService
     {
-        List<PriceList> GetProducts();
-        List<PriceList> GetProducts(double? price);
+        void AddPriceList(PriceList priceList);
+
+        List<PriceList> GetProductsFromPrice(double? price);
     }
 }

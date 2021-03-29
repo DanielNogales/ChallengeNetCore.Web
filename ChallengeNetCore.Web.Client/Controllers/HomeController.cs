@@ -15,30 +15,31 @@ namespace ChallengeNetCore.Web.Client.Controllers
     public class HomeController : Controller
     {
         private readonly ISalesService _salesService;
-        private readonly IMapper _mapper; 
+        private readonly IMapper _mapper;
 
         public HomeController(ISalesService salesService, IMapper mapper)
         {
-            
+
             _salesService = salesService;
             _mapper = mapper;
         }
 
         [BindProperty(SupportsGet = true)]
         public double Price { get; set; }
+        private List<PriceList> PriceLists { get; set; }
 
         public IActionResult Index()
         {
-            var productList = _salesService.GetProducts(Price);
-            return View(productList);
+            PriceLists = _salesService.GetProductsFromPrice(Price);
+            return View(PriceLists);
         }
 
 
         [Route("Home/ProductsList/{price?}")]
         public ViewResult ProductsList(int? price)
         {
-            var productList = _salesService.GetProducts(price);
-            return View(productList);
+            PriceLists = _salesService.GetProductsFromPrice(price);
+            return View(PriceLists);
         }
 
 
@@ -47,17 +48,25 @@ namespace ChallengeNetCore.Web.Client.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public IActionResult AddPriceList(PriceListDto piceListDto)
         {
-            PriceList priceList = GetPriceListFromDto(piceListDto);
+            var priceList = GetPriceListFromDto(piceListDto);
+            _salesService.AddPriceList(priceList);
+
             return RedirectToAction("Index");
         }
 
         PriceList GetPriceListFromDto(PriceListDto piceListDto)
         {
             var priceList = _mapper.Map<PriceList>(piceListDto);
+
+            //var stockService = new StockService();
+            //Category category = stockService.GetCategoryFromName(piceListDto.CategoryName);
+            //if (category != null)
+            //    priceList.Product.Category = category;
+
             return priceList;
         }
 

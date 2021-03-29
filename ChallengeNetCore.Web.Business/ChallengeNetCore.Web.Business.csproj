@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ChallengeNetCore.Web.Data\ChallengeNetCore.Web.Data.csproj" />
     <ProjectReference Include="..\ChallengeNetCore.Web.Model\ChallengeNetCore.Web.Models.csproj" />
   </ItemGroup>
 

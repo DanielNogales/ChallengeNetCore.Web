@@ -1,4 +1,5 @@
-﻿using ChallengeNetCore.Web.Models;
+﻿using ChallengeNetCore.Web.Data;
+using ChallengeNetCore.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,16 @@ namespace ChallengeNetCore.Web.Business
 {
     public class SalesService : ISalesService
     {
-        public List<PriceList> GetProducts(double? price)
+        public void AddPriceList(PriceList priceList)
+        {
+            var priceListRep = new PriceListRepository();
+            priceListRep.AddPriceList(priceList);
+        }
+
+        public List<PriceList> GetProductsFromPrice(double? price)
         {
             if (price == null || price == 0)
-                return GetProducts();
+                return GetAllProducts();
 
 
             if (price > 1_000_000)
@@ -20,19 +27,11 @@ namespace ChallengeNetCore.Web.Business
             List<PriceList> pList = GetProductsGroupCategory(Convert.ToInt32(price));
             return pList;
         }
-
-        public List<PriceList> GetProducts()
+        
+        List<PriceList> GetAllProducts()
         {
             var stkService = new StockService();
             return stkService.GetProducts();
-        }
-
-        class ElementsFromCategory
-        {
-            public int IdCatUno { get; set; }
-            public int IdCatDos { get; set; }
-            public int TotalPrice { get; set; }
-            public int Diff { get; set; }
         }
 
         List<PriceList> GetProductsGroupCategory(int? price)
@@ -67,6 +66,14 @@ namespace ChallengeNetCore.Web.Business
                     .FirstOrDefault());
             }
             return productsGroupCategory;
+        }
+
+        class ElementsFromCategory
+        {
+            public int Diff { get; set; }
+            public int IdCatDos { get; set; }
+            public int IdCatUno { get; set; }
+            public int TotalPrice { get; set; }
         }
     }
 }

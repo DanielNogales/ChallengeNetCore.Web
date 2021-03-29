@@ -18,7 +18,7 @@ namespace ChallengeNetCore.Web.Business.Tests
         {
             var salesService = new SalesService();
 
-            var products = salesService.GetProducts(price);
+            var products = salesService.GetProductsFromPrice(price);
 
             Assert.AreEqual(0, products.Count);
         }
@@ -32,7 +32,7 @@ namespace ChallengeNetCore.Web.Business.Tests
         {
             var salesService = new SalesService();
 
-            var products = salesService.GetProducts(price);
+            var products = salesService.GetProductsFromPrice(price);
 
             Assert.Greater(products.Count, 0);
             Assert.AreEqual(2, products.Count);
@@ -53,7 +53,7 @@ namespace ChallengeNetCore.Web.Business.Tests
         {
             var salesService = new SalesService();
 
-            var products = salesService.GetProducts(0);
+            var products = salesService.GetProductsFromPrice(0);
 
             Assert.Greater(products.Count, 0);
         }

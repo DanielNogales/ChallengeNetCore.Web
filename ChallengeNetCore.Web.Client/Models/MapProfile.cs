@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ChallengeNetCore.Web.Business;
 using ChallengeNetCore.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,10 @@ namespace ChallengeNetCore.Web.Client.Models
     public class MapProfile : Profile
     {
         public MapProfile()
-        {
-            CreateMap<PriceListDto, PriceList>(); // means you want to map from Employee to EmployeeDTO  
-            //.ForMember(d => d.Name, source => source.MapFrom(s => s.FirstName + " " + s.LastName))
-            //.ForMember(d => d.Address, source => source.MapFrom(s => s.StreetAddress + ", " + s.City + ", " + s.Province + ", " + s.Country))
-            //.ForMember(d => d.Phone, source => source.MapFrom(s => s.Phone))
-            //.ForMember(d => d.Email, source => source.MapFrom(s => s.Email));
+        {   
+            CreateMap<PriceListDto, PriceList>()
+                .ForPath(o => o.Product.Name, source => source.MapFrom(s => s.ProductName))
+                .ForPath(d => d.Product.Category.Name, source => source.MapFrom(s => s.CategoryName));
         }
     }
 }
