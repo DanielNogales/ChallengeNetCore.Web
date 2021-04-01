@@ -43,7 +43,7 @@ namespace ChallengeNetCore.Web.Business
             return ProductRep.Get(productName);
         }
 
-        //List<PriceList> GetProductsFromDb()
+        //List<PriceList> GetProductsFromMem()
         //{
         //var pList = new List<PriceList>();
         //var catUno = new Category() { Id = 1, Name = "PRODUNO" };

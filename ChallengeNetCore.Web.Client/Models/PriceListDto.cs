@@ -10,8 +10,10 @@ namespace ChallengeNetCore.Web.Client.Models
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessage ="Ingrese un Nombre de producto")]
         public string ProductName { get; set; }
 
+        [Required(ErrorMessage ="Ingrese un Nombre de categoría")]
         public string CategoryName { get; set; }
 
         public int Price { get; set; }

@@ -26,6 +26,7 @@ namespace ChallengeNetCore.Web.Client.Controllers
 
         [BindProperty(SupportsGet = true)]
         public double Price { get; set; }
+
         private List<PriceList> PriceLists { get; set; }
 
         public IActionResult Index()
@@ -34,14 +35,12 @@ namespace ChallengeNetCore.Web.Client.Controllers
             return View(PriceLists);
         }
 
-
         [Route("Home/ProductsList/{price?}")]
         public ViewResult ProductsList(int? price)
         {
             PriceLists = _salesService.GetProductsFromPrice(price);
             return View(PriceLists);
         }
-
 
         [HttpGet]
         public IActionResult AddPriceList()
@@ -50,12 +49,15 @@ namespace ChallengeNetCore.Web.Client.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPriceList(PriceListDto piceListDto)
+        public IActionResult AddPriceList(PriceListDto priceListDto)
         {
-            var priceList = GetPriceListFromDto(piceListDto);
-            _salesService.AddPriceList(priceList);
-
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                var priceList = GetPriceListFromDto(priceListDto);
+                _salesService.AddPriceList(priceList);
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
         }
 
         PriceList GetPriceListFromDto(PriceListDto priceListDto)
