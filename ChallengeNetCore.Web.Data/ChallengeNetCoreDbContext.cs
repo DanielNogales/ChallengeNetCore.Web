@@ -1,6 +1,8 @@
 ﻿using ChallengeNetCore.Web.Models;
 using Microsoft.EntityFrameworkCore;
+
 using System;
+using System.Diagnostics;
 
 namespace ChallengeNetCore.Web.Data
 {
@@ -8,16 +10,15 @@ namespace ChallengeNetCore.Web.Data
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=W10ROCKBALL\SQLEXPRESS;Encrypt=False;Initial Catalog=ChallengeNetCore;Integrated Security=True;User ID=W10ROCKBALL\nogal");
+            string con = @"Data Source=W10ROCKBALL\SQLEXPRESS;Encrypt=False;Initial Catalog=ChallengeNetCore;Integrated Security=True;User ID=W10ROCKBALL\nogal";
+            optionsBuilder.UseSqlServer(con);
+            optionsBuilder.LogTo(message => Debug.WriteLine(message));
         }
 
         public ChallengeNetCoreDbContext()
         {
         }
 
-        //public ChallengeNetCoreDbContext(DbContextOptions<ChallengeNetCoreDbContext> options)
-        //    : base(options)
-        //{ }
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }

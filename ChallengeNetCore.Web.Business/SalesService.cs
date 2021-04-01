@@ -8,10 +8,34 @@ namespace ChallengeNetCore.Web.Business
 {
     public class SalesService : ISalesService
     {
+        readonly IStockService _stockService;
+
+        public SalesService(IStockService stockService)
+        {
+            _stockService = stockService;
+        }
+
         public void AddPriceList(PriceList priceList)
         {
             var priceListRep = new PriceListRepository();
-            priceListRep.AddPriceList(priceList);
+            var category = _stockService.GetCategoryByName(priceList.Product.Category.Name);
+            if (category == null)
+            {
+                var categoryAdd = new Category { Name = priceList.Product.Category.Name };
+                var categoryRep = new CategoryRepository();
+                category = categoryRep.Add(categoryAdd);
+            }
+
+            var product = _stockService.GetProductByName(priceList.Product.Name);
+            if (product == null)
+            {
+                var productAdd = new Product { Name = priceList.Product.Name, Category = category };
+                var productRep = new ProductRepository();
+                product = productRep.Add(productAdd);
+            }
+
+            priceList.Product = product;
+            priceListRep.Add(priceList);
         }
 
         public List<PriceList> GetProductsFromPrice(double? price)
@@ -27,18 +51,16 @@ namespace ChallengeNetCore.Web.Business
             List<PriceList> pList = GetProductsGroupCategory(Convert.ToInt32(price));
             return pList;
         }
-        
+
         List<PriceList> GetAllProducts()
         {
-            var stkService = new StockService();
-            return stkService.GetProducts();
+            return _stockService.GetProducts();
         }
 
         List<PriceList> GetProductsGroupCategory(int? price)
         {
-            var stkService = new StockService();
-            var listCatUno = stkService.GetProductsCategory("PRODUNO");
-            var listCatDos = stkService.GetProductsCategory("PRODDOS");
+            var listCatUno = _stockService.GetProductsCategory("PRODUNO");
+            var listCatDos = _stockService.GetProductsCategory("PRODDOS");
 
             var cartesianConcat = (from a in listCatUno
                                    from b in listCatDos

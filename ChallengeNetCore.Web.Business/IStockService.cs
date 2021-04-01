@@ -7,5 +7,7 @@ namespace ChallengeNetCore.Web.Business
     {
         List<PriceList> GetProducts();
         List<PriceList> GetProductsCategory(string categoryName);
+        Category GetCategoryByName(string categoryName);
+        Product GetProductByName(string productName);
     }
 }

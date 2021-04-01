@@ -27,6 +27,7 @@ namespace ChallengeNetCore.Web.Client
         {
             services.AddAutoMapper(c => c.AddProfile<MapProfile>(), typeof(Startup));
             services.AddControllersWithViews();
+            services.AddTransient<IStockService, StockService>();
             services.AddSingleton<ISalesService, SalesService>();
         }
 

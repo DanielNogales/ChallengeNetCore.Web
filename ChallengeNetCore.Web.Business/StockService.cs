@@ -14,7 +14,7 @@ namespace ChallengeNetCore.Web.Business
         {
             var priceListRepo = new PriceListRepository();
             var pricesList = priceListRepo
-                .GetPriceLists()
+                .Get()
                 .Include(p => p.Product)
                 .Include(p => p.Product.Category)
                 .ToList();
@@ -31,10 +31,16 @@ namespace ChallengeNetCore.Web.Business
             return pricesListFromCategoryName;
         }
 
-        public Category GetCategoryFromName(string categoryName)
+        public Category GetCategoryByName(string categoryName)
         {
             var categoryRep = new CategoryRepository();
-            return categoryRep.GetCategory(categoryName);
+            return categoryRep.Get(categoryName);
+        }
+
+        public Product GetProductByName(string productName)
+        {
+            var ProductRep = new ProductRepository();
+            return ProductRep.Get(productName);
         }
 
         //List<PriceList> GetProductsFromDb()

@@ -10,7 +10,8 @@ namespace ChallengeNetCore.Web.Data
 
     public class CategoryRepository
     {
-    readonly ChallengeNetCoreDbContext challengeNetCoreDbContext;
+        readonly ChallengeNetCoreDbContext challengeNetCoreDbContext;
+
         public CategoryRepository()
         {
             challengeNetCoreDbContext = new ChallengeNetCoreDbContext();
@@ -21,9 +22,27 @@ namespace ChallengeNetCore.Web.Data
             return challengeNetCoreDbContext.Categories;
         }
 
-        public Category GetCategory(string categoryName)
+        public Category Get(string categoryName)
         {
-            return challengeNetCoreDbContext.Categories.FirstOrDefault(c => c.Name == categoryName);
+            return challengeNetCoreDbContext.Categories
+                .FirstOrDefault(c => c.Name == categoryName);
+        }
+
+        public Category Get(int id)
+        {
+            return challengeNetCoreDbContext.Categories
+                .FirstOrDefault(c => c.Id == id);
+        }
+
+        public Category Add(Category category)
+        {
+            //challengeNetCoreDbContext.Add(category);
+            //challengeNetCoreDbContext.SaveChanges();
+            challengeNetCoreDbContext.Database.ExecuteSqlRaw($@"
+INSERT INTO Categories (Name)
+                VALUES ('{category.Name}')
+");
+            return Get(category.Name);
         }
     }
 }

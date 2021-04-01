@@ -16,26 +16,19 @@ namespace ChallengeNetCore.Web.Data
             challengeNetCoreDbContext = new ChallengeNetCoreDbContext();
         }
 
-        public DbSet<PriceList> GetPriceLists()
+        public DbSet<PriceList> Get()
         {
-            return challengeNetCoreDbContext.PriceLists; 
+            return challengeNetCoreDbContext.PriceLists;
         }
 
-        public void AddPriceLists(List<PriceList> priceLists)
+        public void Add(PriceList priceList)
         {
-            foreach (var priceList in priceLists)
-            {
-                AddPriceList(priceList);
-            }
-        }
-
-        public void AddPriceList(PriceList priceList)
-        {
-            //if (priceList.Product.CategoryId > 0)
-            //    challengeNetCoreDbContext.Entry(priceList.Product.Category).State == EntityState.Unchanged;
-
-            challengeNetCoreDbContext.Add(priceList);
-            challengeNetCoreDbContext.SaveChanges();
+            //challengeNetCoreDbContext.Add(priceList);
+            //challengeNetCoreDbContext.SaveChanges();
+            challengeNetCoreDbContext.Database.ExecuteSqlRaw($@"
+INSERT INTO PriceLists (ProductId, Price, Date)
+              VALUES ({priceList.Product.Id}, {priceList.Price}, '{priceList.Date.ToString("s")}')
+");
         }
     }
 }

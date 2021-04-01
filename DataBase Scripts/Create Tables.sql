@@ -35,3 +35,7 @@ CREATE INDEX [IX_Products_CategoryId] ON [Products] ([CategoryId]);
 GO
 
 
+INSERT INTO Categories(Name) VALUES(N'PRODUNO')
+GO
+INSERT INTO Categories(Name) VALUES(N'PRODDOS')
+GO

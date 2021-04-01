@@ -10,15 +10,23 @@ namespace ChallengeNetCore.Web.Business.Tests
     [TestFixture()]
     public class SalesServiceTests
     {
+        IStockService _stockService;
+        ISalesService _salesService;
+
+        [OneTimeSetUp]
+        public void Setup()
+        {
+            _stockService = new StockService();
+            _salesService = new SalesService(_stockService);
+        }
+        
         [TestCase(-1)]
         [TestCase(-5_000)]
         [TestCase(-1_000_000)]
         [TestCase(2_000_000)]
         public void GetProducts_InValidPriceTest(int price)
         {
-            var salesService = new SalesService();
-
-            var products = salesService.GetProductsFromPrice(price);
+            var products = _salesService.GetProductsFromPrice(price);
 
             Assert.AreEqual(0, products.Count);
         }
@@ -30,9 +38,7 @@ namespace ChallengeNetCore.Web.Business.Tests
         [TestCase(1_000_000)]
         public void GetProducts_ValidPriceTest(int price)
         {
-            var salesService = new SalesService();
-
-            var products = salesService.GetProductsFromPrice(price);
+            var products = _salesService.GetProductsFromPrice(price);
 
             Assert.Greater(products.Count, 0);
             Assert.AreEqual(2, products.Count);
@@ -51,9 +57,7 @@ namespace ChallengeNetCore.Web.Business.Tests
         [Test()]
         public void GetProducts_ZeroPriceTest()
         {
-            var salesService = new SalesService();
-
-            var products = salesService.GetProductsFromPrice(0);
+            var products = _salesService.GetProductsFromPrice(0);
 
             Assert.Greater(products.Count, 0);
         }

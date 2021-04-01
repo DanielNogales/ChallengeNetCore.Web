@@ -11,7 +11,7 @@ namespace ChallengeNetCore.Web.Client.Models
     public class MapProfile : Profile
     {
         public MapProfile()
-        {   
+        {
             CreateMap<PriceListDto, PriceList>()
                 .ForPath(o => o.Product.Name, source => source.MapFrom(s => s.ProductName))
                 .ForPath(d => d.Product.Category.Name, source => source.MapFrom(s => s.CategoryName));

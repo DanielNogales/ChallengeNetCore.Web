@@ -58,15 +58,9 @@ namespace ChallengeNetCore.Web.Client.Controllers
             return RedirectToAction("Index");
         }
 
-        PriceList GetPriceListFromDto(PriceListDto piceListDto)
+        PriceList GetPriceListFromDto(PriceListDto priceListDto)
         {
-            var priceList = _mapper.Map<PriceList>(piceListDto);
-
-            //var stockService = new StockService();
-            //Category category = stockService.GetCategoryFromName(piceListDto.CategoryName);
-            //if (category != null)
-            //    priceList.Product.Category = category;
-
+            var priceList = _mapper.Map<PriceList>(priceListDto);
             return priceList;
         }
 
